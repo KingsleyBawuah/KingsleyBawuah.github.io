@@ -18,7 +18,7 @@
 	body,input,textarea,select
 	{
 		font-family: 'Oxygen', sans-serif;
-		font-size: 13pt;
+		font-size: 23pt;
 		line-height: 2em;
 	}
 
@@ -86,6 +86,7 @@
 	p, ul, ol, dl, table
 	{
 		margin-bottom: 1em;
+		font-size: larger;
 	}
 
 	header

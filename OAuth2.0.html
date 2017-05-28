@@ -59,13 +59,24 @@
 			<div id="content" class="12u skel-cell-important">
 				<section>
 					<header>
-						<h2>No Sidebar</h2>
-						<span class="byline">Vivamus fermentum nibh in augue praesent congue rutrum</span>
+						<h2>OAuth2.0</h2>
+						<span class="byline"></span>
 					</header>
-					<p><a href="#" class="image full"><img src="images/pics02.jpg" alt=""></a></p>
-					<p>Maecenas pede nisl, elementum eu, ornare ac, malesuada at, erat. Proin gravida orci porttitor enim accumsan lacinia. Donec condimentum, urna non molestie semper, ligula enim ornare nibh, quis laoreet eros quam eget ante. Aliquam libero. Vivamus nisl nibh, iaculis vitae, viverra sit amet, ullamcorper vitae, turpis. Aliquam erat volutpat. Vestibulum dui sem, pulvinar sed, imperdiet nec, iaculis nec, leo. Fusce odio. Etiam arcu dui, faucibus eget, placerat vel, sodales eget, orci. Donec ornare neque ac sem. Mauris aliquet. Aliquam sem leo, vulputate sed, convallis at, ultricies quis, justo. Donec nonummy magna quis risus. Quisque eleifend. Phasellus tempor vehicula justo.</p>
-					<p>Pellentesque pede. Donec pulvinar ullamcorper metus. In eu odio at lectus pulvinar mollis. Vestibulum sem magna, elementum ut, vestibulum eu, facilisis quis, arcu. Mauris a dolor. Nulla facilisi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed blandit. Phasellus pellentesque, ante nec iaculis dapibus, eros justo auctor lectus, a lobortis lorem mauris quis nunc. Praesent pellentesque facilisis elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. In hac habitasse platea dictumst. Nullam id ante eget dui vulputate aliquam. Pellentesque erat erat, tincidunt in, eleifend accumsan, malesuada eget, augue. Suspendisse sit amet tellus in eros bibendum condimentum. Vestibulum suscipit volutpat nulla. Phasellus pellentesque, ante nec iaculis dapibus, eros justo auctor lectus, a lobortis lorem mauris quis nunc. Praesent pellentesque facilisis elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos.</p>
-					<p>Vestibulum sem magna, elementum ut, vestibulum eu, facilisis quis, arcu. Mauris a dolor. Nulla facilisi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed blandit. Phasellus pellentesque, ante nec iaculis dapibus, eros justo auctor lectus, a lobortis lorem mauris quis nunc. Praesent pellentesque facilisis elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. In hac habitasse platea dictumst. Nullam id ante eget dui vulputate aliquam. Pellentesque erat erat, tincidunt in, eleifend accumsan, malesuada eget, augue. Suspendisse sit amet tellus in eros bibendum condimentum. Vestibulum suscipit volutpat nulla. Phasellus pellentesque, ante nec iaculis dapibus, eros justo auctor lectus, a lobortis lorem mauris quis nunc. Praesent pellentesque facilisis elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Pellentesque pede. Donec pulvinar ullamcorper metus. In eu odio at lectus pulvinar mollis.</p>
+					<p><a href="#" class="image full"><img style="width: 50%; height: 50%" src="images/dev_oauth_badge.jpg" alt=""></a></p>
+					<p><i>Now to begin this section i want to begin by stating that AniList has good documentation explaining the use of Oauth 2.0 to recieve authorization to make calls. Here is the link <a href="http://anilist-api.readthedocs.io/en/latest/introduction.html"/>link </a>  . We will be covereing some of the same things but more on how to do it in aprogramming language rather than a manual URL request through a browser. The way i am about to teach you is not recommended for a production ready application but it can be used to make calls for information in something like a tool for personal use.</i><br>
+					</p>
+					<br>
+
+					<p> Api calls to access AniList's Data require the prefix "https://anilist.co/api/" . After this prefix you state a path name with certain parameters such as an access code to make calls for information . Depending on the type of "grant" used, you will have different levels of permissions to access different  pieces of data. As you can imagine the more sensitive information will require a more complicated grant. We will be covering the simple "client credentials" grant in this tutorial. </p>
+					<br>
+					<p>A Client criendtials grant is pretty simple, in fact it is the most simple out of the authentication grant types. We will provide our client id, and client secret to the server. The server willl then send back a repsonse(if we provide it with the right information and it is accepted.). This reponse is sent as a JSON object with information such as the access token, time till expiration, and we need to parse and display the object. We will simply be viewing this in the console. So lets begin our first request for a token.
+					</p>
+					<br>
+					<div><script async src="//jsfiddle.net/rastamonstahh/jtmrb5bj/embed/js,html,css,result/dark/"></script></div>
+					<p>First, we begin our code by declaring variables that will hold our parameters. We then use these paramters to setup a new http request then we parse and log the response to the console.</p>
+					<br>
+					<p>Now, we have an access token. This access token will expire in an hour so when we need another we will run this code again. Go ahead and copy this value in your clipboard as we will use it in our actual data request code.
+					</p>
 				</section>
 			</div>
 			<!-- /Content -->
@@ -77,64 +88,7 @@
 <!-- Main -->
 
 <!-- Footer -->
-<div id="footer">
-	<div class="container">
-		<div class="row">
-			<div class="3u">
-				<section>
-					<ul class="style1">
-						<li><img src="images/pics05.jpg" width="78" height="78" alt="">
-							<p>Nullam non wisi a sem eleifend. Donec mattis libero eget urna. </p>
-							<p class="posted">August 11, 2014  |  (10 )  Comments</p>
-						</li>
-						<li><img src="images/pics06.jpg" width="78" height="78" alt="">
-							<p>Nullam non wisi a sem eleifend. Donec mattis libero eget urna. </p>
-							<p class="posted">August 11, 2014  |  (10 )  Comments</p>
-						</li>
-						<li><img src="images/pics07.jpg" width="78" height="78" alt="">
-							<p>Nullam non wisi a sem eleifend. Donec mattis libero eget urna. </p>
-							<p class="posted">August 11, 2014  |  (10 )  Comments</p>
-						</li>
-					</ul>
-				</section>
-			</div>
-			<div class="3u">
-				<section>
-					<ul class="style1">
-						<li class="first"><img src="images/pics08.jpg" width="78" height="78" alt="">
-							<p>Nullam non wisi a sem eleifend. Donec mattis libero eget urna. </p>
-							<p class="posted">August 11, 2014  |  (10 )  Comments</p>
-						</li>
-						<li><img src="images/pics09.jpg" width="78" height="78" alt="">
-							<p>Nullam non wisi a sem eleifend. Donec mattis libero eget urna. </p>
-							<p class="posted">August 11, 2014  |  (10 )  Comments</p>
-						</li>
-						<li><img src="images/pics10.jpg" width="78" height="78" alt="">
-							<p>Nullam non wisi a sem eleifend. Donec mattis libero eget urna. </p>
-							<p class="posted">August 11, 2014  |  (10 )  Comments</p>
-						</li>
-					</ul>
-				</section>
-			</div>
-			<div class="6u">
-				<section>
-					<header>
-						<h2>Aenean elementum</h2>
-					</header>
-					<p>In posuere eleifend odio. Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque viverra vulputate enim. Aliquam erat volutpat. Pellentesque tristique ante ut risus. Quisque dictum. Integer nisl risus, sagittis convallis, rutrum id, elementum congue, nibh. Suspendisse dictum porta lectus.</p>
-					<ul class="default">
-						<li><a href="#">Pellentesque quis lectus gravida blandit.</a></li>
-						<li><a href="#">Lorem ipsum consectetuer adipiscing elit.</a></li>
-						<li><a href="#">Phasellus nec nibh pellentesque congue.</a></li>
-						<li><a href="#">Cras aliquam risus pellentesque pharetra.</a></li>
-						<li><a href="#">Duis non metus commodo euismod lobortis.</a></li>
-						<li><a href="#">Lorem ipsum dolor adipiscing elit.</a></li>
-					</ul>
-				</section>
-			</div>
-		</div>
-	</div>
-</div>
+
 <!-- Footer -->
 
 <!-- Copyright -->
