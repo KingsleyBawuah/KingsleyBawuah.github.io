@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Monochromed by TEMPLATED</title>
+		<title>Final Result</title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
@@ -41,7 +41,6 @@
 							<li><a href="index.html">Intro</a></li>
 							<li><a href="AJAX.html">AJAX</a></li>
 							<li><a href="OAuth2.0.html">OuAuth 2.0</a></li>
-							<li><a href="jQuery.html">jQuery</a></li>
 							<li class="active"><a href="FinalResult.html">Final Result</a></li>
 						</ul>
 					</nav>
@@ -59,13 +58,23 @@
 						<div id="content" class="12u skel-cell-important">
 							<section>
 								<header>
-									<h2>No Sidebar</h2>
-									<span class="byline">Vivamus fermentum nibh in augue praesent congue rutrum</span>
+									<h2>Final Result</h2>
+									<span class="byline">Finally, we make the request for data...</span>
 								</header>
-								<p><a href="#" class="image full"><img src="images/pics02.jpg" alt=""></a></p>
-								<p>Maecenas pede nisl, elementum eu, ornare ac, malesuada at, erat. Proin gravida orci porttitor enim accumsan lacinia. Donec condimentum, urna non molestie semper, ligula enim ornare nibh, quis laoreet eros quam eget ante. Aliquam libero. Vivamus nisl nibh, iaculis vitae, viverra sit amet, ullamcorper vitae, turpis. Aliquam erat volutpat. Vestibulum dui sem, pulvinar sed, imperdiet nec, iaculis nec, leo. Fusce odio. Etiam arcu dui, faucibus eget, placerat vel, sodales eget, orci. Donec ornare neque ac sem. Mauris aliquet. Aliquam sem leo, vulputate sed, convallis at, ultricies quis, justo. Donec nonummy magna quis risus. Quisque eleifend. Phasellus tempor vehicula justo.</p>
-					<p>Pellentesque pede. Donec pulvinar ullamcorper metus. In eu odio at lectus pulvinar mollis. Vestibulum sem magna, elementum ut, vestibulum eu, facilisis quis, arcu. Mauris a dolor. Nulla facilisi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed blandit. Phasellus pellentesque, ante nec iaculis dapibus, eros justo auctor lectus, a lobortis lorem mauris quis nunc. Praesent pellentesque facilisis elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. In hac habitasse platea dictumst. Nullam id ante eget dui vulputate aliquam. Pellentesque erat erat, tincidunt in, eleifend accumsan, malesuada eget, augue. Suspendisse sit amet tellus in eros bibendum condimentum. Vestibulum suscipit volutpat nulla. Phasellus pellentesque, ante nec iaculis dapibus, eros justo auctor lectus, a lobortis lorem mauris quis nunc. Praesent pellentesque facilisis elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos.</p>
-					<p>Vestibulum sem magna, elementum ut, vestibulum eu, facilisis quis, arcu. Mauris a dolor. Nulla facilisi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed blandit. Phasellus pellentesque, ante nec iaculis dapibus, eros justo auctor lectus, a lobortis lorem mauris quis nunc. Praesent pellentesque facilisis elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. In hac habitasse platea dictumst. Nullam id ante eget dui vulputate aliquam. Pellentesque erat erat, tincidunt in, eleifend accumsan, malesuada eget, augue. Suspendisse sit amet tellus in eros bibendum condimentum. Vestibulum suscipit volutpat nulla. Phasellus pellentesque, ante nec iaculis dapibus, eros justo auctor lectus, a lobortis lorem mauris quis nunc. Praesent pellentesque facilisis elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Pellentesque pede. Donec pulvinar ullamcorper metus. In eu odio at lectus pulvinar mollis.</p>
+
+								<p>So now, we have achieved sending a request to the server and received a parsed JSON object with our access code. For the type of requests, we are going to do, this is all the authenticating we need. Now, to get the information, we must essentially update our code to make a new request. We will need to change some of the variables and completely remove some as well. We will no longer need to have the client ID, client secret, grant type, and tokenUrl. We will now be using a variable to store our access token (copied from the last step), and we will rename our URL variable to seriesURL to reflect the data we are requesting. We are going to be making a GET request to search the database for manga with a certain keyword. So, in our case let’s try out the search feature!  Our request will be pointing to "https://anilist.co/api/manga/search/fate " (If you are confused on how we got this route read the documentation) If our request was successful then we should be getting back JSON objects about the selected keyword, which is "fate" in our case.</p>
+
+								<script async src="//jsfiddle.net/rastamonstahh/rqo4gj55/4/embed/js,result/dark/"></script>
+								<p><i>Hit edit on JSFiddle and update the authCode variable with the code you received earlier!</i></p>
+					<p>Since we are sending a GET request the body of our URL can be empty hence the null value on line 9. We will also use different request headers for this call. Now this something that isn't explained very well in the documentation and can leave you stuck wondering why you are getting an error code 401(like I did).  For this request, we will use an Authorization: type Bearer. You may remember this as one of the values sent back to us in our request for an access token. If you look at line 8 you will see how that is represented in code form. Notice the space behind the second parameter 'Bearer ', this must be there for the server to recognize it! </p>
+					<p>Now that we've noted the differences from the previous code, let’s see this in action, replace the authCode string with the access code you received in the last step and change the search parameter to anything you’d like! If you hit run, you should see the returned objects in the developer console! They will have a variety of properties which are explained in the documentation. Try this with a few different search words and see what kinds of series you find.  </p>
+								<br><p>Now that's cool, right? If we were implementing this on an application, we could have it access this data and display it to our users without them ever needing to leave our app!</p>
+								<p>Let's try another call that only needs client credentials! Let’s go ahead and retrieve the user reviews for one of my favorite manga called Attack on Titan. The route for this one tells us it needs a manga id and the one for the series we chose is “53390”. This route displays an array of review models, so this will need a slight tweaking of our code. Precisely a for loop to loop through the array of reviews and print the text from each to the console. Edit the code below and search for some reviews on some series you enjoy!</p>
+								<script async src="//jsfiddle.net/rastamonstahh/rqo4gj55/5/embed/js,result/dark/"></script> <br>
+								<p>There is only one review for Attack on Titan but if there were more they would be displayed one by one!</p><br>
+								<p>We’ve reached the end of the tutorial and hopefully by now you should a good understand of AJAX requests, JSON, Oauth2.0, and how to make a request using JS! Now remember you normally won’t be making requests this way as it can expose your information, but this demonstrates some of what may be somewhat abstracted from you when you make requests server side, using a framework like Node.JS.
+									I hope you enjoyed this tutorial and can now make requests to API which utilize Oauth2.0 and client credential grant types!
+								</p>
 							</section>
 						</div>
 					<!-- /Content -->
@@ -77,64 +86,7 @@
 	<!-- Main -->
 
 	<!-- Footer -->
-		<div id="footer">
-			<div class="container">
-				<div class="row">
-					<div class="3u">
-						<section>
-							<ul class="style1">
-								<li><img src="images/pics05.jpg" width="78" height="78" alt="">
-									<p>Nullam non wisi a sem eleifend. Donec mattis libero eget urna. </p>
-									<p class="posted">August 11, 2014  |  (10 )  Comments</p>
-								</li>
-								<li><img src="images/pics06.jpg" width="78" height="78" alt="">
-									<p>Nullam non wisi a sem eleifend. Donec mattis libero eget urna. </p>
-									<p class="posted">August 11, 2014  |  (10 )  Comments</p>
-								</li>
-								<li><img src="images/pics07.jpg" width="78" height="78" alt="">
-									<p>Nullam non wisi a sem eleifend. Donec mattis libero eget urna. </p>
-									<p class="posted">August 11, 2014  |  (10 )  Comments</p>
-								</li>
-							</ul>
-						</section>
-					</div>
-					<div class="3u">
-						<section>
-							<ul class="style1">
-								<li class="first"><img src="images/pics08.jpg" width="78" height="78" alt="">
-									<p>Nullam non wisi a sem eleifend. Donec mattis libero eget urna. </p>
-									<p class="posted">August 11, 2014  |  (10 )  Comments</p>
-								</li>
-								<li><img src="images/pics09.jpg" width="78" height="78" alt="">
-									<p>Nullam non wisi a sem eleifend. Donec mattis libero eget urna. </p>
-									<p class="posted">August 11, 2014  |  (10 )  Comments</p>
-								</li>
-								<li><img src="images/pics10.jpg" width="78" height="78" alt="">
-									<p>Nullam non wisi a sem eleifend. Donec mattis libero eget urna. </p>
-									<p class="posted">August 11, 2014  |  (10 )  Comments</p>
-								</li>
-							</ul>
-						</section>				
-					</div>
-					<div class="6u">
-						<section>
-							<header>
-								<h2>Aenean elementum</h2>
-							</header>
-							<p>In posuere eleifend odio. Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque viverra vulputate enim. Aliquam erat volutpat. Pellentesque tristique ante ut risus. Quisque dictum. Integer nisl risus, sagittis convallis, rutrum id, elementum congue, nibh. Suspendisse dictum porta lectus.</p>
-							<ul class="default">
-								<li><a href="#">Pellentesque quis lectus gravida blandit.</a></li>
-								<li><a href="#">Lorem ipsum consectetuer adipiscing elit.</a></li>
-								<li><a href="#">Phasellus nec nibh pellentesque congue.</a></li>
-								<li><a href="#">Cras aliquam risus pellentesque pharetra.</a></li>
-								<li><a href="#">Duis non metus commodo euismod lobortis.</a></li>
-								<li><a href="#">Lorem ipsum dolor adipiscing elit.</a></li>
-							</ul>
-						</section>
-					</div>
-				</div>
-			</div>
-		</div>
+
 	<!-- Footer -->
 
 	<!-- Copyright -->
